@@ -61,6 +61,32 @@
         "sys"
       ]
     },
+    "aws.s3": {
+      "Package": "aws.s3",
+      "Version": "0.3.21",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "a0b873f71741bba67e3bc128d8f09fe3",
+      "Requirements": [
+        "aws.signature",
+        "base64enc",
+        "curl",
+        "digest",
+        "httr",
+        "xml2"
+      ]
+    },
+    "aws.signature": {
+      "Package": "aws.signature",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0006bcef272aad12f78dd5a85fc7f4fc",
+      "Requirements": [
+        "base64enc",
+        "digest"
+      ]
+    },
     "base64enc": {
       "Package": "base64enc",
       "Version": "0.1-3",
@@ -1108,6 +1134,14 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "a318c6f752b8dcfe9fb74d897418ab2b",
+      "Requirements": []
+    },
+    "xml2": {
+      "Package": "xml2",
+      "Version": "1.3.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "40682ed6a969ea5abfd351eb67833adc",
       "Requirements": []
     },
     "xtable": {

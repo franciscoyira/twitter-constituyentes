@@ -7,14 +7,31 @@ library(reactablefmtr)
 library(plotly)
 library(tweetrmd)
 library(waiter)
+library(aws.s3)
+
+source(here("source", "func_status_badge.R"))
+source(here("source", "func_update_rds_df.R"))
 
 htmltools::tagList(
   tweetrmd:::html_dependency_twitter()
 )
 
+# Read the RDS files from AWS -----
+# Retrieves the files metadata
+rds_files_df <-
+  aws.s3::get_bucket_df("fyac-final-data-twitter-constituyentes")
+
+# Downloads files from S3 if the S3 version is more recent
+# (or if there isn't a local version)
+purrr::walk(rds_files_df$Key, update_rds_df)
+
+# Reads the files from /data into memory
 rnk_tweets <- read_rds(here("data", "rnk_tweets.rds"))
 rnk_total_engagement <- read_rds(here("data", "rnk_total_engagement.rds"))
+df_plot_coalitions <-
+  read_rds(here("data", "df_plot_coalitions.rds"))
 
+# Some post processing ----
 max_engagement <- max(rnk_total_engagement$total_engagement)
 
 rnk_data <- rnk_total_engagement[,c("screen_name",
@@ -22,13 +39,6 @@ rnk_data <- rnk_total_engagement[,c("screen_name",
                                     "lista_grouped",
                                     "genero",
                                     "edad")]
-
-
-source(here("source", "func_status_badge.R"))
-
-# df_plot_coalitions
-df_plot_coalitions <-
-  read_rds(here("data", "df_plot_coalitions.rds"))
 
 df_last_week <-
   df_plot_coalitions %>%
@@ -49,6 +59,7 @@ pal <-  c(
   `Vamos por Chile` = "#306bac"
 )
 
+# The APP ----
 ui <- fluidPage(
   autoWaiter(id = "p", fadeout = TRUE, color = "white",
              html =
