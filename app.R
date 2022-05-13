@@ -23,7 +23,7 @@ rds_files_df <-
 
 # Downloads files from S3 if the S3 version is more recent
 # (or if there isn't a local version)
-purrr::walk(rds_files_df$Key, update_rds_df)
+purrr::walk(rds_files_df$Key, update_rds_df, df_rds = rds_files_df)
 
 # Reads the files from /data into memory
 rnk_tweets <- read_rds(here("data", "rnk_tweets.rds"))
@@ -261,7 +261,7 @@ server <- function(input, output, session) {
           cell = function(value) {
             image <-
               img(
-                src = paste0("/profile_pics/", sprintf("%s.jpg", value)),
+                src = paste0("profile_pics/", sprintf("%s.jpg", value)),
                 height = "30px",
                 alt = value
               )
