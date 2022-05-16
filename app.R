@@ -62,6 +62,9 @@ pal <-  c(
 
 # The APP (UI) ----
 ui <- fluidPage(
+  tags$head(tags$style("body{
+              min-width: 650px;
+          }")),
   gfonts::use_pkg_gfont("roboto"),
   shiny::tags$link(rel = "icon", href = "favicon.ico"),
   HTML('<script data-goatcounter="https://constituyentes-franciscoyira.goatcounter.com/count"
@@ -241,8 +244,7 @@ server <- function(input, output, session) {
                                  ),
                                  list(label = "Todo",
                                       step = "all")
-                               ))
-        ),
+                               ))),
         yaxis = list(title = 'Engagement total (Likes + RTs)'),
         legend = list(title = list(text = '<b>Coaliciones</b>'),
                       itemclick="toggleothers",
@@ -268,7 +270,7 @@ server <- function(input, output, session) {
       columns = list(
         screen_name = colDef(
           name = "Username de Twitter",
-          minWidth = 220,
+          minWidth = 180,
           maxWidth = 220,
           vAlign = "center",
           cell = function(value) {
@@ -303,7 +305,7 @@ server <- function(input, output, session) {
         ),
         lista_grouped = colDef(
           name = "Coalición",
-          minWidth = 220,
+          #minWidth = 220,
           vAlign = "center",
           cell = function(value) {
             badge <- status_badge(lista = value)
@@ -349,6 +351,7 @@ server <- function(input, output, session) {
       ))
   })
 
+    # TABLE TWEETS ------
 output$top_tweets <- renderReactable( {
   reactable(
     data_tweets(),
@@ -368,7 +371,8 @@ output$top_tweets <- renderReactable( {
           tweet_embed(Tweet, omit_script = FALSE, plain = TRUE)
         },
         style = reactablefmtr::cell_style(font_size = 12),
-        html = TRUE
+        html = TRUE,
+        minWidth = 265
       ),
       Likes = colDef(
         maxWidth = 100,
