@@ -12,6 +12,7 @@ library(aws.s3)
 source(here("source", "func_status_badge.R"))
 source(here("source", "func_update_rds_df.R"))
 
+
 htmltools::tagList(
   tweetrmd:::html_dependency_twitter()
 )
@@ -61,11 +62,16 @@ pal <-  c(
 
 # The APP ----
 ui <- fluidPage(
+  gfonts::use_pkg_gfont("roboto"),
+  HTML('<script data-goatcounter="https://constituyentes-franciscoyira.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>'
+     ),
   autoWaiter(id = "p", fadeout = TRUE, color = "white",
              html =
                div(style = "color: gray", spin_loaders(id = 5, color = "gray"), h5("Cargando..."))
                ),
-  titlePanel(div(style = "font-family: Bahnschrift Condensed;
+  titlePanel(div(style = "font-family: Roboto;
+  font-style: bold;
     background-color: #47127D;
     color: white;
     text-align: center;
@@ -234,7 +240,7 @@ server <- function(input, output, session) {
         legend = list(title = list(text = '<b>Coaliciones</b>'),
                       itemclick="toggleothers",
                       itemdoubleclick=FALSE),
-        font = list(family = "Bierstadt",
+        font = list(family = "Roboto",
                     size = 12)
       ) %>%
       config(displaylogo = FALSE,
@@ -310,7 +316,7 @@ server <- function(input, output, session) {
       paginationType = "simple",
       defaultPageSize = 12,
       searchable = TRUE,
-      style = list(fontFamily = 'Bierstadt'),
+      style = list(fontFamily = 'Roboto'),
       language = reactableLang(
         searchPlaceholder = "Buscar constituyentes (username o coalición)",
         pagePrevious = "Anterior",
@@ -395,7 +401,7 @@ output$top_tweets <- renderReactable( {
       pageNumbers = "{page} de {pages}"),
     bordered = FALSE,
     showPageInfo = FALSE,
-    style = list(fontFamily = 'Bierstadt'),
+    style = list(fontFamily = 'Roboto'),
     highlight = TRUE,
     defaultPageSize = 6,
     paginationType = "simple",
