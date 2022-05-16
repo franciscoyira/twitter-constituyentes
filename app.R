@@ -60,7 +60,7 @@ pal <-  c(
   `Vamos por Chile` = "#306bac"
 )
 
-# The APP ----
+# The APP (UI) ----
 ui <- fluidPage(
   gfonts::use_pkg_gfont("roboto"),
   HTML('<script data-goatcounter="https://constituyentes-franciscoyira.goatcounter.com/count"
@@ -109,6 +109,11 @@ ui <- fluidPage(
            ),
            fluidRow(reactableOutput(outputId = "top_tweets")))),
   fluidRow(div(style = list("text-align: center;
+    font-size: 14px;
+    color: #595959;
+    margin-block: 14px;"),
+               "Se actualiza semanalmente (martes en la tarde). ", tags$a(href="https://buttondown.email/constituyentes-franciscoyira", "Suscríbete aquí"), " para recibir una alerta.")),
+  fluidRow(div(style = list("text-align: center;
     font-size: 9px;
     color: #C0C0C0;
     padding: 10px:"),
@@ -121,6 +126,7 @@ ui <- fluidPage(
   # https://shiny.rstudio.com/articles/layout-guide.html
 )
 
+# The APP (Server) ----
 server <- function(input, output, session) {
   # selected rows in Constituents table
   selected <- reactive(getReactableState("t", "selected"))
