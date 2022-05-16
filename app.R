@@ -63,6 +63,7 @@ pal <-  c(
 # The APP (UI) ----
 ui <- fluidPage(
   gfonts::use_pkg_gfont("roboto"),
+  shiny::tags$link(rel = "icon", href = "favicon.ico"),
   HTML('<script data-goatcounter="https://constituyentes-franciscoyira.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>'
      ),
