@@ -49,6 +49,8 @@ an AWS S3 bucket. The code that retrieves, wrangles and makes the data
 available for the app is in this other repo:
 [`pipeline-twitter-constituyentes`](https://github.com/franciscoyira/pipeline-twitter-constituyentes).
 
+![](images/diagram_pipeline.png)
+
 ## Deployment
 
 The app is deployed using the [RStudio Server Amazon Machine Image

@@ -37,6 +37,8 @@ The ranking of tweets only displays the 12 ones with more engagement, based on t
 
 The data displayed on the app is refreshed weekly on Tuesday evenings on an AWS S3 bucket. The code that retrieves, wrangles and makes the data available for the app is in this other repo: [`pipeline-twitter-constituyentes`](https://github.com/franciscoyira/pipeline-twitter-constituyentes).
 
+![](images/diagram_pipeline.png)
+
 ## Deployment
 
 The app is deployed using the [RStudio Server Amazon Machine Image (AMI)](https://www.louisaslett.com/RStudio_AMI/). On this AMI, the repo should be cloned inside `/home/ShinyApps/`, after login in with the user `rstudio` (if you access the RStudio Server GUI you're automatically logged in with that user).
